@@ -1,0 +1,8 @@
+<?php $numBlocks = $block->getNumberOfBlocks() ?>
+<div>
+    <?php for ($i = 0; $i<$numBlocks; $i++): ?>
+    <div>
+        <?php echo $block->getRandomBlockContent() ?>
+    </div>
+    <?php endfor; ?>
+</div>
