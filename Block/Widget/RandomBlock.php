@@ -12,6 +12,7 @@ class RandomBlock extends Template
     /** @var  array $_blockArray */
     protected $_blockArray = [];
 
+    /** @var BlockFactory $_blockFactory */
     protected $_blockFactory;
 
     /**
@@ -28,6 +29,11 @@ class RandomBlock extends Template
         $this->setTemplate('AAllen_RandomBlock::random.phtml');
     }
 
+    /**
+     * Populate the _blockArray with blocks from user supplied list of id's
+     *
+     * @return null
+     */
     protected function getRandomBlock()
     {
         //get the array of block IDs
@@ -42,10 +48,12 @@ class RandomBlock extends Template
             }
         }
         shuffle($this->_blockArray);
+
+        return null;
     }
 
     /**
-     * Get a random block.
+     * Get html for a random block.
      * 
      * @return string
      */
@@ -55,6 +63,11 @@ class RandomBlock extends Template
         return array_pop($this->_blockArray)->getContent();
     }
 
+    /**
+     * Get the number of blocks to be inserted.
+     *
+     * @return int
+     */
     public function getNumberOfBlocks()
     {
         return (int)$this->getData('numBlocks');
