@@ -2,7 +2,10 @@
 <div>
     <?php for ($i = 0; $i<$numBlocks; $i++): ?>
     <div>
-        <?php echo $block->getRandomBlockContent() ?>
+        <?php echo $this->getLayout()
+            ->createBlock('Magento\Cms\Block\Block')
+            ->setBlockId($block->getRandomBlockId())
+            ->toHtml();?>
     </div>
     <?php endfor; ?>
 </div>

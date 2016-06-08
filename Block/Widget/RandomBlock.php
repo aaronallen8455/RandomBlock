@@ -57,10 +57,10 @@ class RandomBlock extends Template
      * 
      * @return string
      */
-    public function getRandomBlockContent()
+    public function getRandomBlockId()
     {
         if (empty($this->_blockArray)) $this->getRandomBlock();
-        return array_pop($this->_blockArray)->getContent();
+        return array_pop($this->_blockArray)->getId();
     }
 
     /**
