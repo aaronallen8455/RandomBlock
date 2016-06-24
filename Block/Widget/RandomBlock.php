@@ -2,16 +2,13 @@
 
 namespace AAllen\RandomBlock\Block\Widget;
 
-use Magento\Cms\Model\Block;
 use Magento\Cms\Model\BlockFactory;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
+use Magento\Widget\Block\BlockInterface;
 
-class RandomBlock extends Template
+class RandomBlock extends Template implements BlockInterface
 {
-    /** @var  array $_blockArray */
-    protected $_blockArray = [];
-
     /** @var BlockFactory $_blockFactory */
     protected $_blockFactory;
 
@@ -25,42 +22,19 @@ class RandomBlock extends Template
     {
         parent::__construct($context, $data);
 
+        $this->_isScopePrivate = true;
         $this->_blockFactory = $blockFactory;
         $this->setTemplate('AAllen_RandomBlock::random.phtml');
     }
 
     /**
-     * Populate the _blockArray with blocks from user supplied list of id's
+     * Get the list of block ids
      *
-     * @return null
-     */
-    protected function getRandomBlock()
-    {
-        //get the array of block IDs
-        $ids = $this->getData('ids');
-        $ids = preg_split('/\D+/', $ids);
-        //generate blocks from the specified IDs
-        foreach ($ids as $id) {
-            /** @var Block $block */
-            $block = $this->_blockFactory->create()->load((int)$id);
-            if ($block->getId()) {
-                $this->_blockArray[] = $block;
-            }
-        }
-        shuffle($this->_blockArray);
-
-        return null;
-    }
-
-    /**
-     * Get html for a random block.
-     * 
      * @return string
      */
-    public function getRandomBlockId()
+    public function getRandomBlockIds()
     {
-        if (empty($this->_blockArray)) $this->getRandomBlock();
-        return array_pop($this->_blockArray)->getId();
+        return $this->getData('ids');
     }
 
     /**

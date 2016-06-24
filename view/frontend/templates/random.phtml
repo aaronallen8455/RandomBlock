@@ -1,11 +1,10 @@
-<?php $numBlocks = $block->getNumberOfBlocks() ?>
-<div>
-    <?php for ($i = 0; $i<$numBlocks; $i++): ?>
-    <div>
-        <?php echo $this->getLayout()
-            ->createBlock('Magento\Cms\Block\Block')
-            ->setBlockId($block->getRandomBlockId())
-            ->toHtml();?>
-    </div>
-    <?php endfor; ?>
+<div data-mage-init ='
+{
+    "AAllen_RandomBlock/js/render": {
+        "ids" : "<?php echo $block->getRandomBlockIds() ?>",
+        "num" : <?php echo $block->getNumberOfBlocks() ?>,
+        "loaderUrl": "<?php echo $block->getViewFileUrl('images/loader-1.gif') ?>"
+    }
+}
+'>
 </div>
